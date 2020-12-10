@@ -2,9 +2,11 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import { api } from '../../api/api';
 
+const NUMBER_OF_STORIES = 100;
+
 export const fetchNews = createAsyncThunk('news/fetchNews', async () => {
   const response = await api.getNewStoriesIds();
-  const newStoriesIds = response.slice(0, 5);
+  const newStoriesIds = response.slice(0, NUMBER_OF_STORIES);
   const news = [];
   for (let id of newStoriesIds) {
     const response = await api.getItemById(id);

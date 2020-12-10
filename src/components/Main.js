@@ -1,9 +1,14 @@
 import React from 'react';
 
-export const Main = ({ children }) => {
+import { Section } from '../components/Section';
+import { ArticlesList } from '../features/news/ArticlesList';
+
+export const Main = () => {
   return (
     <main>
-      {children}
+      <Section>
+        <ArticlesList />
+      </Section>
     </main>
   )
 }

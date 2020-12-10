@@ -10,18 +10,21 @@ import { Link } from 'react-router-dom';
 
 import { Section } from '../../components/Section';
 
+import { CommentsList } from './CommentsList';
+
 export const SingleNewsPage = ({ match }) => {
+
   const { newsId } = match.params;
 
   const newsData = useSelector(state => selectNewsById(state, newsId));
 
   if (!newsData) {
-      return (
-          <Section>
-              <h2>News not found!</h2>
-              <Link to="/">Back to news list</Link>
-          </Section>
-      )
+    return (
+        <section>
+            <h2>News not found!</h2>
+            <Link to="/">Back to news list</Link>
+        </section>
+    )
   }
 
   return (
@@ -34,9 +37,9 @@ export const SingleNewsPage = ({ match }) => {
         >
           Link to news
         </a>
-        <h2>
+        <h3>
           {newsData.title}
-        </h2>
+        </h3>
         <p>
           Date: {secToString(newsData.time)}
         </p>
@@ -44,8 +47,13 @@ export const SingleNewsPage = ({ match }) => {
           By: {newsData.by}
         </p>
         <p>
-          Comments: {newsData.kids ? newsData.kids.length : '0'}
+          Number of Comments (root): {newsData.kids ? newsData.kids.length : '0'}
         </p>
+        {newsData.kids ?
+          <CommentsList commentsIds={newsData.kids}/>
+        :
+          null
+        }
         <Link to="/">Back to news list</Link>
       </article>
     </Section>

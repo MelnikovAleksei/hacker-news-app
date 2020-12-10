@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom';
 export const Article = ({ data }) => {
   return (
     <article>
-      <h2>
+      <h3>
         {data.title}
-      </h2>
+      </h3>
       <p>
         Rating: {data.score}
       </p>

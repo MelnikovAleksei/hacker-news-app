@@ -6,8 +6,6 @@ import { fetchNews, selectAllNews, selectNewsStatus, selectNewsError } from './n
 
 import { Article } from './Article';
 
-import { Section } from '../../components/Section';
-
 export const ArticlesList = () => {
   const dispatch = useDispatch();
 
@@ -35,14 +33,14 @@ export const ArticlesList = () => {
     content = <div className="loader">Loading...</div>
   } else if (newsStatus === 'succeeded') {
     content = news.map(story => (
-      <Article key={story.id} data={story} />
+      <li key={story.id} id={story.id}><Article data={story} /></li>
     ))
   } else if (newsStatus === 'failed') {
     content = <div>{newsError}</div>
   }
 
   return (
-    <Section>
+    <>
       <button
         disabled={newsStatus === 'loading'}
         onClick={() => { dispatch(fetchNews()) }}
@@ -52,7 +50,10 @@ export const ArticlesList = () => {
         :
           'Update News'}
       </button>
-      {content}
-    </Section>
+      <h2>News list:</h2>
+      <ol>
+        {content}
+      </ol>
+    </>
   )
 }
