@@ -7,7 +7,7 @@ export const fetchNews = createAsyncThunk('news/fetchNews', async () => {
   const newStoriesIds = response.slice(0, 10);
   const news = [];
   for (let id of newStoriesIds) {
-    const response = await api.getNewsById(id);
+    const response = await api.getItemById(id);
     news.push(response);
   }
   return news;

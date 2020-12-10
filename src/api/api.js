@@ -11,7 +11,7 @@ class Api {
     return res.json();
   }
 
-  getNewsById(id) {
+  getItemById(id) {
     return fetch(`${this._url}/v0/item/${id}.json`, {
       method: 'GET',
       headers: this._headers
