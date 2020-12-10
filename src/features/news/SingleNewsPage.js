@@ -41,10 +41,7 @@ export const SingleNewsPage = ({ match }) => {
           Date: {secToString(newsData.time)}
         </p>
         <p>
-          By:
-          <span>
-            {newsData.by}
-          </span>
+          By: {newsData.by}
         </p>
         <p>
           Comments: {newsData.kids ? newsData.kids.length : '0'}
