@@ -26,11 +26,9 @@ class Api {
   }
 }
 
-const api = new Api({
+export const api = new Api({
   baseUrl: 'https://hacker-news.firebaseio.com',
   headers: {
     'Content-Type': 'application/json'
   }
 });
-
-export default api;
