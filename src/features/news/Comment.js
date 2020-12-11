@@ -45,8 +45,8 @@ export const Comment = ({ id }) => {
         {commentData.kids && (
           <p>{commentData.kids.length} nested comment('s)</p>
         )}
-        <p>by: {commentData.by}</p>
-        <p>Date: {secToString(commentData.time)}</p>
+        <address>by: {commentData.by}</address>
+        <p>Date: <time>{secToString(commentData.time)}</time></p>
         <h4>Comment text:</h4>
         {isLoadingCommentData ?
           'Loading...'
