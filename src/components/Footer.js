@@ -3,8 +3,7 @@ import React from 'react';
 export const Footer = () => {
   return (
     <footer>
-      <p>Author: Melnikov Aleksei</p>
-      <p>Hacker News website interface consisting of two pages</p>
+      <address>Author: Melnikov Aleksei</address>
       <nav>
           <h3>Contacts:</h3>
           <ul>

@@ -30,13 +30,13 @@ export const ArticlesList = () => {
   let content;
 
   if (newsStatus === 'loading') {
-    content = <div className="loader">Loading...</div>
+    content = <p>Loading...</p>
   } else if (newsStatus === 'succeeded') {
     content = news.map(story => (
       <li key={story.id} id={story.id}><Article data={story} /></li>
     ))
   } else if (newsStatus === 'failed') {
-    content = <div>{newsError}</div>
+    content = <p>{newsError}</p>
   }
 
   return (

@@ -7,18 +7,22 @@ import { Link } from 'react-router-dom';
 export const Article = ({ data }) => {
   return (
     <article>
-      <h3>
-        {data.title}
-      </h3>
+      <header>
+        <h3>
+          {data.title}
+        </h3>
+      </header>
       <p>
-        Rating: {data.score}
+        The story's score: {data.score}
       </p>
-      <p>
+      <address>
         By: {data.by}
-      </p>
-      <p>
-        Date: {secToString(data.time)}
-      </p>
+      </address>
+      <footer>
+        <p>
+          Date: <time>{secToString(data.time)}</time>
+        </p>
+      </footer>
       <Link to={`/news/${data.id}`}>Go to this news</Link>
     </article>
   )
