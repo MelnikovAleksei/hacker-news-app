@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { fetchNews, selectAllNews, selectNewsStatus, selectNewsError } from './newsSlice';
 
+import { UPDATE_TIME } from '../../utils/constants/constansts';
+
 import { Article } from './Article';
 
 export const ArticlesList = () => {
@@ -16,7 +18,7 @@ export const ArticlesList = () => {
   React.useEffect(() => {
     const updateNews = setTimeout(() => {
       dispatch(fetchNews());
-    }, 60000)
+    }, UPDATE_TIME)
 
     if (newsStatus === 'idle') {
       dispatch(fetchNews())
