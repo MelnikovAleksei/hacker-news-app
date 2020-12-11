@@ -32,7 +32,9 @@ export const ArticlesList = () => {
   let content;
 
   if (newsStatus === 'loading') {
-    content = <p>Loading...</p>
+    content = news.map(story => (
+      <li key={story.id} id={story.id}><Article data={story} /></li>
+    ))
   } else if (newsStatus === 'succeeded') {
     content = news.map(story => (
       <li key={story.id} id={story.id}><Article data={story} /></li>
@@ -48,11 +50,12 @@ export const ArticlesList = () => {
         onClick={() => { dispatch(fetchNews()) }}
       >
         {newsStatus === 'loading' ?
-          'Updating...'
+          'Loading...'
         :
           'Update News'}
       </button>
-      <h2>News list:</h2>
+      <h2>News list {newsStatus === 'loading' && '(loading...)'}:</h2>
+      {newsStatus === 'loading' && <p>Loading...</p>}
       <ol>
         {content}
       </ol>
