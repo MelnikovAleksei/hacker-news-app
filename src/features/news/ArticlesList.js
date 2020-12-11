@@ -2,50 +2,54 @@ import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { fetchNews, selectAllNews, selectNewsStatus, selectNewsError } from './newsSlice';
+import { fetchNewsIds, selectAllNewsIds, selectNewsIdsStatus, selectNewsIdsError } from './newsSlice';
 
-import { Article } from './Article';
+import { UPDATE_TIME } from '../../utils/constansts/constants';
+
+import { ListItem } from './ListItem';
 
 export const ArticlesList = () => {
   const dispatch = useDispatch();
 
-  const news = useSelector(selectAllNews);
-  const newsStatus = useSelector(selectNewsStatus);
-  const newsError = useSelector(selectNewsError);
+  const newsIds = useSelector(selectAllNewsIds);
+  const newsIdsStatus = useSelector(selectNewsIdsStatus);
+  const newsIdsError = useSelector(selectNewsIdsError);
 
   React.useEffect(() => {
-    const updateNews = setTimeout(() => {
-      dispatch(fetchNews());
-    }, 60000)
+    const updateNewsIds = setTimeout(() => {
+      dispatch(fetchNewsIds());
+    }, UPDATE_TIME)
 
-    if (newsStatus === 'idle') {
-      dispatch(fetchNews())
+    if (newsIdsStatus === 'idle') {
+      dispatch(fetchNewsIds())
     }
 
     return () => {
-      clearTimeout(updateNews);
+      clearTimeout(updateNewsIds);
     }
-  }, [newsStatus, dispatch])
+  }, [newsIdsStatus, dispatch])
 
   let content;
 
-  if (newsStatus === 'loading') {
-    content = <div className="loader">Loading...</div>
-  } else if (newsStatus === 'succeeded') {
-    content = news.map(story => (
-      <li key={story.id} id={story.id}><Article data={story} /></li>
+  if (newsIdsStatus === 'loading') {
+    content = newsIds.map(id => (
+      <ListItem key={id} id={id} />
     ))
-  } else if (newsStatus === 'failed') {
-    content = <div>{newsError}</div>
+  } else if (newsIdsStatus === 'succeeded') {
+    content = newsIds.map(id => (
+      <ListItem key={id} id={id} />
+    ))
+  } else if (newsIdsStatus === 'failed') {
+    content = <p>{newsIdsError} news ids</p>
   }
 
   return (
     <>
       <button
-        disabled={newsStatus === 'loading'}
-        onClick={() => { dispatch(fetchNews()) }}
+        disabled={newsIdsStatus === 'loading'}
+        onClick={() => { dispatch(fetchNewsIds()) }}
       >
-        {newsStatus === 'loading' ?
+        {newsIdsStatus === 'loading' ?
           'Updating...'
         :
           'Update News'}
