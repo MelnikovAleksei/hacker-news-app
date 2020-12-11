@@ -15,10 +15,10 @@ export const Article = ({ data }) => {
       <p>
         The story's score: {data.score}
       </p>
-      <address>
-        By: {data.by}
-      </address>
       <footer>
+        <address>
+          By: {data.by}
+        </address>
         <p>
           Date: <time>{secToString(data.time)}</time>
         </p>
