@@ -7,8 +7,7 @@ import {
   selectNewsById,
   selectAllRootComments,
   selectRootCommentsStatus,
-  selectRootCommentsError,
-  clearComments
+  selectRootCommentsError
 } from './newsSlice';
 
 import { secToString } from '../../utils/secToString';
@@ -22,7 +21,6 @@ import { Section } from '../../components/Section';
 import { CommentsList } from './CommentsList';
 
 export const SingleNewsPage = ({ match }) => {
-  const [comments, setComments] = React.useState(null);
   const dispatch = useDispatch();
 
   const rootComments = useSelector(selectAllRootComments);
