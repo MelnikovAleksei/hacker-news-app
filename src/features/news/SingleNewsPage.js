@@ -50,7 +50,7 @@ export const SingleNewsPage = ({ match }) => {
   let commentsMarkup;
 
   if (rootCommentsStatus === 'loading') {
-    commentsMarkup = (<p>Loading...</p>);
+    commentsMarkup = (<CommentsList data={Object.values(rootComments)}/>);
   } else if (rootCommentsStatus === 'succeeded') {
     commentsMarkup = (<CommentsList data={Object.values(rootComments)}/>);
   } else if (rootCommentsStatus === 'failed') {
@@ -86,6 +86,7 @@ export const SingleNewsPage = ({ match }) => {
         <button
           type="button"
           onClick={handleClickUpdate}
+          disabled={rootCommentsStatus === 'loading'}
         >
           {rootCommentsStatus === 'loading' ?
             'Loading...'

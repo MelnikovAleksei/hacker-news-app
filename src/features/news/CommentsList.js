@@ -1,14 +1,10 @@
 import React from 'react';
 
-import { Comment } from './Comment';
+import { RootComment } from './RootComment';
 
 export const CommentsList = ({ data }) => {
-  const listItems = data.map(item => (
-    <Comment
-      key={item.id}
-      data={item}
-    />
-  ))
+  const listItems = data.map(item => item.deleted ? (<li>Comment has been deleted</li>) : (<RootComment key={item.id} data={item}/>));
+
   return (
     <ul>
       {listItems}
