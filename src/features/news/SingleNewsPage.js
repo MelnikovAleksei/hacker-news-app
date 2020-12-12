@@ -28,15 +28,17 @@ export const SingleNewsPage = ({ match }) => {
 
   React.useEffect(() => {
     const updateRootComments = setTimeout(() => {
-      newsData.kids && dispatch(fetchRootComments(newsData.kids));
+      dispatch(fetchRootComments(newsData.kids));
     }, UPDATE_TIME)
 
-    newsData.kids && dispatch(fetchRootComments(newsData.kids));
+    if (rootCommentsStatus === 'idle') {
+      dispatch(fetchRootComments(newsData.kids));
+    }
 
     return () => {
       clearTimeout(updateRootComments);
     }
-  }, [dispatch, newsData])
+  }, [dispatch, rootCommentsStatus])
 
   if (!newsData) {
     return (

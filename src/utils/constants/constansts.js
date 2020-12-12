@@ -1,1 +1,1 @@
-export const UPDATE_TIME = 5000;
+export const UPDATE_TIME = 15000;
