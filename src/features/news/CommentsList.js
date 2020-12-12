@@ -2,18 +2,16 @@ import React from 'react';
 
 import { Comment } from './Comment';
 
-export const CommentsList = ({ commentsIds }) => {
-  const listItems = commentsIds.map(id => (
+export const CommentsList = ({ data }) => {
+  const listItems = data.map(item => (
     <Comment
-      key={id}
-      id={id}
+      key={item.id}
+      data={item}
     />
   ))
   return (
-    <>
-      <ul>
-        {listItems}
-      </ul>
-    </>
+    <ul>
+      {listItems}
+    </ul>
   )
 }

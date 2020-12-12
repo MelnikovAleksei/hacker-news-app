@@ -1,10 +1,12 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { selectNewsById } from './newsSlice';
+import { fetchRootComments, selectNewsById, selectAllRootComments, selectRootCommentsStatus, selectRootCommentsError } from './newsSlice';
 
 import { secToString } from '../../utils/secToString';
+
+import { UPDATE_TIME } from '../../utils/constants/constansts';
 
 import { Link } from 'react-router-dom';
 
@@ -14,9 +16,27 @@ import { CommentsList } from './CommentsList';
 
 export const SingleNewsPage = ({ match }) => {
 
+  const dispatch = useDispatch();
+
+  const rootComments = useSelector(selectAllRootComments);
+  const rootCommentsStatus = useSelector(selectRootCommentsStatus);
+  const rootCommentsError = useSelector(selectRootCommentsError);
+
   const { newsId } = match.params;
 
   const newsData = useSelector(state => selectNewsById(state, newsId));
+
+  React.useEffect(() => {
+    const updateRootComments = setTimeout(() => {
+      newsData.kids && dispatch(fetchRootComments(newsData.kids));
+    }, UPDATE_TIME)
+
+    newsData.kids && dispatch(fetchRootComments(newsData.kids));
+
+    return () => {
+      clearTimeout(updateRootComments);
+    }
+  }, [dispatch, newsData])
 
   if (!newsData) {
     return (
@@ -25,6 +45,20 @@ export const SingleNewsPage = ({ match }) => {
             <Link to="/">Back to news list</Link>
         </section>
     )
+  }
+
+  let commentsMarkup;
+
+  if (rootCommentsStatus === 'loading') {
+    commentsMarkup = (<p>Loading...</p>);
+  } else if (rootCommentsStatus === 'succeeded') {
+    commentsMarkup = (<CommentsList data={Object.values(rootComments)}/>);
+  } else if (rootCommentsStatus === 'failed') {
+    commentsMarkup = <p>{rootCommentsError}</p>
+  }
+
+  const handleClickUpdate = () => {
+    newsData.kids && dispatch(fetchRootComments(newsData.kids));
   }
 
   return (
@@ -47,13 +81,19 @@ export const SingleNewsPage = ({ match }) => {
           By: {newsData.by}
         </p>
         <p>
-          Number of Comments (root): {newsData.kids ? newsData.kids.length : '0'}
+          {newsData.kids ? newsData.kids.length : '0'} root comment('s)
         </p>
-        {newsData.kids ?
-          <CommentsList commentsIds={newsData.kids}/>
-        :
-          null
-        }
+        <button
+          type="button"
+          onClick={handleClickUpdate}
+        >
+          {rootCommentsStatus === 'loading' ?
+            'Loading...'
+          :
+            'Update comments'
+          }
+        </button>
+        {commentsMarkup}
         <Link to="/">Back to news list</Link>
       </article>
     </Section>

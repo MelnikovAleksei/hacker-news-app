@@ -19,7 +19,7 @@ class Api {
   }
 
   getNewStoriesIds() {
-    return fetch(`${this._url}/v0/newstories.json?print=pretty&orderBy="$key"&limitToFirst=100`, {
+    return fetch(`${this._url}/v0/topstories.json?print=pretty&orderBy="$key"&limitToFirst=7`, {
       method: 'GET',
       headers: this._headers
     }).then(this._handleOriginalResponse)
