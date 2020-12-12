@@ -61,7 +61,7 @@ export const SingleNewsPage = ({ match }) => {
   let commentsMarkup;
 
   if (rootCommentsStatus === 'loading') {
-    commentsMarkup = (<CommentsList data={rootComments}/>);
+    commentsMarkup = (<p>Loading...</p>);
   } else if (rootCommentsStatus === 'succeeded') {
     commentsMarkup = (<CommentsList data={rootComments}/>);
   } else if (rootCommentsStatus === 'failed') {
@@ -105,7 +105,7 @@ export const SingleNewsPage = ({ match }) => {
             'Update comments'
           }
         </button>
-        {commentsMarkup}
+        {newsData.kids && commentsMarkup}
         <Link to="/">Back to news list</Link>
       </article>
     </Section>
