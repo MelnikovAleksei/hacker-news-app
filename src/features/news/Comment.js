@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { CommentsList } from './CommentsList';
-
 import parse from 'html-react-parser';
 import { decodeEntities } from '../../utils/decodeEntities';
 import { secToString } from '../../utils/secToString';

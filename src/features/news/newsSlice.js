@@ -54,7 +54,6 @@ const newsSlice = createSlice({
       state.statusRootComments = 'succeeded';
       const newComments = action.payload;
       const keysNewComments = Object.keys(newComments);
-      const keysStateComments = Object.keys(state.comments);
       keysNewComments.forEach((key) => {
         state.comments[key] = newComments[key];
       })
