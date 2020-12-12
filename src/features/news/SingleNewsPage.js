@@ -2,6 +2,8 @@ import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
+import { RootComment } from './RootComment';
+
 import {
   fetchRootComments,
   selectNewsById,
@@ -49,27 +51,37 @@ export const SingleNewsPage = ({ match }) => {
     }
   }, [dispatch, rootCommentsStatus, newsData.kids])
 
-  if (!newsData) {
-    return (
-        <section>
-            <h2>News not found!</h2>
-            <Link to="/">Back to news list</Link>
-        </section>
-    )
-  }
-
   let commentsMarkup;
 
   if (rootCommentsStatus === 'loading') {
-    commentsMarkup = (<p>Loading...</p>);
+    commentsMarkup = rootComments.map(data =>
+    data.deleted ?
+      (<li key={data.id}>Comment has been deleted</li>)
+    :
+      (<RootComment key={data.id} data={data}/>)
+  )
   } else if (rootCommentsStatus === 'succeeded') {
-    commentsMarkup = (<CommentsList data={rootComments}/>);
+    commentsMarkup = rootComments.map(data =>
+      data.deleted ?
+        (<li key={data.id}>Comment has been deleted</li>)
+      :
+        (<RootComment key={data.id} data={data}/>)
+    )
   } else if (rootCommentsStatus === 'failed') {
     commentsMarkup = <p>{rootCommentsError}</p>
   }
 
   const handleClickUpdate = () => {
     newsData.kids && dispatch(fetchRootComments(newsData.kids));
+  }
+
+  if (!newsData) {
+    return (
+        <section>
+          <h2>News not found!</h2>
+          <Link to="/">Back to news list</Link>
+        </section>
+    )
   }
 
   return (
@@ -105,7 +117,7 @@ export const SingleNewsPage = ({ match }) => {
             'Update comments'
           }
         </button>
-        {newsData.kids && commentsMarkup}
+        {newsData.kids && <CommentsList>{commentsMarkup}</CommentsList>}
         <Link to="/">Back to news list</Link>
       </article>
     </Section>

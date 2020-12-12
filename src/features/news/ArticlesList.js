@@ -54,8 +54,7 @@ export const ArticlesList = () => {
         :
           'Update News'}
       </button>
-      <h2>News list {newsStatus === 'loading' && '(loading...)'}:</h2>
-      {newsStatus === 'loading' && <p>Loading...</p>}
+      <h2>News list {newsStatus === 'loading' && <span>(loading...)</span>}</h2>
       <ol>
         {content}
       </ol>
