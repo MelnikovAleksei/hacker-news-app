@@ -54,12 +54,7 @@ export const SingleNewsPage = ({ match }) => {
   let commentsMarkup;
 
   if (rootCommentsStatus === 'loading') {
-    commentsMarkup = rootComments.map(data =>
-    data.deleted ?
-      (<li key={data.id}>Comment has been deleted</li>)
-    :
-      (<RootComment key={data.id} data={data}/>)
-  )
+    commentsMarkup = (<p>Loading...</p>)
   } else if (rootCommentsStatus === 'succeeded') {
     commentsMarkup = rootComments.map(data =>
       data.deleted ?
