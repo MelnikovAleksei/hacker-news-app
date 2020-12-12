@@ -2,7 +2,14 @@ import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { fetchRootComments, selectNewsById, selectAllRootComments, selectRootCommentsStatus, selectRootCommentsError } from './newsSlice';
+import {
+  fetchRootComments,
+  selectNewsById,
+  selectAllRootComments,
+  selectRootCommentsStatus,
+  selectRootCommentsError,
+  clearComments
+} from './newsSlice';
 
 import { secToString } from '../../utils/secToString';
 
@@ -15,7 +22,7 @@ import { Section } from '../../components/Section';
 import { CommentsList } from './CommentsList';
 
 export const SingleNewsPage = ({ match }) => {
-
+  const [comments, setComments] = React.useState(null);
   const dispatch = useDispatch();
 
   const rootComments = useSelector(selectAllRootComments);
@@ -25,6 +32,10 @@ export const SingleNewsPage = ({ match }) => {
   const { newsId } = match.params;
 
   const newsData = useSelector(state => selectNewsById(state, newsId));
+
+  React.useEffect(() => {
+    dispatch(fetchRootComments(newsData.kids));
+  }, [dispatch, newsData])
 
   React.useEffect(() => {
     const updateRootComments = setTimeout(() => {
@@ -38,7 +49,7 @@ export const SingleNewsPage = ({ match }) => {
     return () => {
       clearTimeout(updateRootComments);
     }
-  }, [dispatch, rootCommentsStatus])
+  }, [dispatch, rootCommentsStatus, newsData.kids])
 
   if (!newsData) {
     return (
@@ -52,9 +63,9 @@ export const SingleNewsPage = ({ match }) => {
   let commentsMarkup;
 
   if (rootCommentsStatus === 'loading') {
-    commentsMarkup = (<CommentsList data={Object.values(rootComments)}/>);
+    commentsMarkup = (<CommentsList data={rootComments}/>);
   } else if (rootCommentsStatus === 'succeeded') {
-    commentsMarkup = (<CommentsList data={Object.values(rootComments)}/>);
+    commentsMarkup = (<CommentsList data={rootComments}/>);
   } else if (rootCommentsStatus === 'failed') {
     commentsMarkup = <p>{rootCommentsError}</p>
   }
@@ -83,7 +94,7 @@ export const SingleNewsPage = ({ match }) => {
           By: {newsData.by}
         </p>
         <p>
-          {newsData.kids ? newsData.kids.length : '0'} root comment('s)
+          {newsData.kids ? newsData.descendants : '0'} comment('s)
         </p>
         <button
           type="button"

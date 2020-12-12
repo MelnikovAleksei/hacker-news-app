@@ -34,7 +34,7 @@ export const NestedComment = ({ id }) => {
 
   return (
     commentData.deleted ?
-      <li>Comment has been deleted</li>
+      <li key={commentData.id}>Comment has been deleted</li>
     :
       <li
         onClick={commentData.kids && handleCommentClick}

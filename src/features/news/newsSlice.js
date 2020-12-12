@@ -14,17 +14,17 @@ export const fetchNews = createAsyncThunk('news/fetchNews', async () => {
 })
 
 export const fetchRootComments = createAsyncThunk('news/fetchRootComments', async (ids) => {
-  const map = {};
+  const comments = [];
   for (const id of ids) {
     const response = await api.getItemById(id);
-    map[id] = response;
+    comments.push(response)
   }
-  return map
+  return comments;
 })
 
 const initialState = {
   news: [],
-  comments: {},
+  comments: [],
   status: 'idle',
   statusRootComments: 'idle',
   error: null,
@@ -52,11 +52,7 @@ const newsSlice = createSlice({
     },
     [fetchRootComments.fulfilled]: (state, action) => {
       state.statusRootComments = 'succeeded';
-      const newComments = action.payload;
-      const keysNewComments = Object.keys(newComments);
-      keysNewComments.forEach((key) => {
-        state.comments[key] = newComments[key];
-      })
+      state.comments = action.payload;
     },
     [fetchRootComments.rejected]: (state, action) => {
       state.statusRootComments = 'failed';
@@ -66,6 +62,8 @@ const newsSlice = createSlice({
 })
 
 export default newsSlice.reducer;
+
+export const { clearComments } = newsSlice.actions;
 
 export const selectAllNews = state => state.news.news;
 export const selectNewsById = (state, newsId) => state.news.news.find(story => story.id === Number(newsId));

@@ -7,24 +7,29 @@ import { NestedCommentList } from './NestedCommentList';
 
 export const RootComment = ({ data }) => {
   const [commentsList, setCommentsList] = React.useState(null);
+  const [commentData, setCommentData] = React.useState({});
+
+  React.useEffect(() => {
+    setCommentData(data);
+  }, [data])
 
   const handleCommentClick = () => {
-    const nestedCommentListMarkup = <NestedCommentList commentsIds={data.kids}/>;
+    const nestedCommentListMarkup = <NestedCommentList commentsIds={commentData.kids}/>;
     setCommentsList(nestedCommentListMarkup)
   }
 
   return (
     <li
-      onClick={data.kids && handleCommentClick}
+      onClick={commentData.kids && handleCommentClick}
     >
-      {data.kids && (
-        <p>{data.kids.length} nested comment('s)</p>
+      {commentData.kids && (
+        <p>{commentData.kids.length} nested comment('s)</p>
       )}
-      <address>by: {data.by}</address>
-      <p>Date: <time>{secToString(data.time)}</time></p>
+      <address>by: {commentData.by}</address>
+      <p>Date: <time>{secToString(commentData.time)}</time></p>
       <h4>Comment text:</h4>
-      {parse(decodeEntities(data.text))}
-      {data.kids && commentsList}
+      {parse(decodeEntities(commentData.text))}
+      {commentData.kids && commentsList}
     </li>
   )
 }
