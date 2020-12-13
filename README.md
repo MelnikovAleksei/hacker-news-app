@@ -1,68 +1,62 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# Тестовое задание: "Hacker News App (Reactjs/Redux App)".
 
-## Available Scripts
+## Создана по заданию для стажера Frontend в команду Seller Experience компании Авито.
 
-In the project directory, you can run:
+*Ссылка на тестовое задание:* [репозиторий GitHub](https://github.com/avito-tech/sx-frontend-trainee-assignment)
 
-### `npm start`
+## Описание:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+"Hacker News App" - интерфейс для сайта [Hacker News](https://news.ycombinator.com/news) состоящий из главной страницы и страницы новости. Главная страница содержит список из последних 100 новостей. Страница новости содержит 1 выбранную новость и комментарии к ней.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+На главной странице загружаются последние 100 новостей. На странице новости загружаются комментарии.
 
-### `npm test`
+[Версия приложения с другой логикой работы его компонентов и состояния](https://github.com/MelnikovAleksei/hacker-news/)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[Тестовое задание на GitHub Pages](https://melnikovaleksei.github.io/hacker-news-app/)
 
-### `npm run build`
+## Функционал:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* На главной странице есть кнопка для принудительного обновления списка новостей
+* Список новостей на главной странице обновляется каждую минуту
+* На странице новости есть кнопка для принудительного обновления комментариев
+* Список комментариев обновляется каждую минуту (сбрасывая состояние компонента комментария *на доработке*)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Технологии:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Git
+* JavaScript (Asynchronous JS, OOP, Fetch API)
+* React JS
+* Redux
+* Functional Components
 
-### `npm run eject`
+## Инструкция по установке:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Клонировать репозиторий:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+`
+git clone https://github.com/MelnikovAleksei/hacker-news-app
+`
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+В директории проекта запустить приложение в режиме разработки:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+npm install
+npm start
+```
 
-## Learn More
+## Будущая доработка проекта будет включать в себя:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* Создание функционала автоматического обновления новости на странице новости
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Языки:
 
-### Code Splitting
+* JavaScript
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## Библиотеки:
 
-### Analyzing the Bundle Size
+* Reactjs
+* Redux
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## Стили:
 
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+В задании были использована коллекция стилей [Water.css](https://watercss.kognise.dev/)
