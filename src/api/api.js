@@ -1,3 +1,5 @@
+import { NUMBER_OF_NEWS } from '../utils/constants/constansts';
+
 class Api {
   constructor(options) {
     this._url = options.baseUrl;
@@ -19,7 +21,7 @@ class Api {
   }
 
   getNewStoriesIds() {
-    return fetch(`${this._url}/v0/topstories.json?print=pretty&orderBy="$key"&limitToFirst=5`, {
+    return fetch(`${this._url}/v0/newstories.json?print=pretty&orderBy="$key"&limitToFirst=${NUMBER_OF_NEWS}`, {
       method: 'GET',
       headers: this._headers
     }).then(this._handleOriginalResponse)
