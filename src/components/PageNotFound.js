@@ -6,7 +6,7 @@ export const PageNotFound = () => {
   return (
     <main>
       <h3>404 Page not found</h3>
-      <Link to="/">Back to news list</Link>
+      <Link to="/hacker-news-app">Back to news list</Link>
     </main>
   )
 }

@@ -9,7 +9,7 @@ export const Header = () => {
       <nav>
         <ul>
           <NavLink
-            to="/"
+            to="/hacker-news-app"
             activeClassName=""
           >
             News List

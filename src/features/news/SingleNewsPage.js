@@ -113,7 +113,7 @@ export const SingleNewsPage = ({ match }) => {
           }
         </button>
         {newsData.kids && <CommentsList>{commentsMarkup}</CommentsList>}
-        <Link to="/">Back to news list</Link>
+        <Link to="/hacker-news-app">Back to news list</Link>
       </article>
     </Section>
   )
